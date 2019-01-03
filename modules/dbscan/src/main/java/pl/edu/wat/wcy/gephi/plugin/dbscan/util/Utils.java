@@ -1,4 +1,4 @@
-package util;
+package pl.edu.wat.wcy.gephi.plugin.dbscan.util;
 
 import org.gephi.graph.api.Node;
 

@@ -1,6 +1,6 @@
-package core;
+package pl.edu.wat.wcy.gephi.plugin.dbscan.core;
 
-import core.metrics.DistanceMetric;
+import pl.edu.wat.wcy.gephi.plugin.dbscan.core.metrics.DistanceMetric;
 import org.gephi.graph.api.Element;
 import org.gephi.graph.api.GraphModel;
 import org.gephi.graph.api.Node;
@@ -12,9 +12,10 @@ import org.gephi.utils.progress.ProgressTicket;
 
 import java.text.SimpleDateFormat;
 import java.util.*;
+import org.gephi.graph.api.Column;
 
-import static core.Labels.*;
-import static util.HtmlUtils.*;
+import static pl.edu.wat.wcy.gephi.plugin.dbscan.core.Labels.*;
+import static pl.edu.wat.wcy.gephi.plugin.dbscan.util.HtmlUtils.*;
 
 /**
  * http://wsinf.edu.pl/assets/img/pdf/Zeszyty%20naukowe/vol.13/art03%20(3).pdf
@@ -72,7 +73,10 @@ public class Dbscan implements Statistics, LongTask {
 
     private void prepareGraphModel(GraphModel graphModel) {
         if (graphModel.getNodeTable().hasColumn(ATTRIBUTE_CLUSTER)) {
-            graphModel.getGraphVisible().getNodes().forEach(Element::clearAttributes);
+            final Column column = graphModel.getNodeTable().getColumn(ATTRIBUTE_CLUSTER);
+            for (Node node : graphModel.getGraphVisible().getNodes()) {
+                node.setAttribute(column, null);
+            }
         } else {
             graphModel.getNodeTable().addColumn(ATTRIBUTE_CLUSTER, Integer.class);
         }

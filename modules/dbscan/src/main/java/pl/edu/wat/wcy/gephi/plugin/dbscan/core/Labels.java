@@ -1,4 +1,4 @@
-package core;
+package pl.edu.wat.wcy.gephi.plugin.dbscan.core;
 
 public class Labels {
     public static final String NAME = "DBSCAN";
